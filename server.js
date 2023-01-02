@@ -38,12 +38,6 @@ app.use(fileUpload());
     ##########################
 */
 
-/* 
-    ########################################
-    ### Middlewares de Error y Not Found ###
-    ########################################
-*/
-
 // Middleware de Error
 app.use((error, req, res, _) => {
 	console.error(error);
