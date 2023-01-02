@@ -40,31 +40,31 @@ app.use(fileUpload());
 
 // Middleware de Error
 app.use((error, req, res, _) => {
-	console.error(error);
+  console.error(error);
 
-	// Establecemos el codigo del error
-	res.status(error.httpStatus || 500);
+  // Establecemos el codigo del error
+  res.status(error.httpStatus || 500);
 
-	// Respondemos
-	res.send({
-		status: "Error",
-		message: error.message,
-	});
+  // Respondemos
+  res.send({
+    status: "Error",
+    message: error.message,
+  });
 });
 
 // Middleware de Not Found
 app.use((req, res) => {
-	// Establecemos el codigo de error 404
-	res.status(404);
+  // Establecemos el codigo de error 404
+  res.status(404);
 
-	// Respondemos
-	res.send({
-		status: "Error",
-		message: "Not found",
-	});
+  // Respondemos
+  res.send({
+    status: "Error",
+    message: "Not found",
+  });
 });
 
 // Ponemos el servidor a la escucha
 app.listen(process.env.PORT, () => {
-	console.log(`Server listening at http://localhost:${process.env.PORT}`);
+  console.log(`Server listening at http://localhost:${process.env.PORT}`);
 });
