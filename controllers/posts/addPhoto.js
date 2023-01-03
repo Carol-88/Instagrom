@@ -1,58 +1,38 @@
-/* 
-    Controlador que permite añadir una nueva foto de producto
-*/
-
 const getDB = require('../../db/getDB');
-const { generateError} = require('../../helpers/error');
+const { generateError } = require('../../helpers/error');
 
-
-const addProductPhoto = async (req, res, next) => {
+const addPhoto = async (req, res, next) => {
     let connection;
 
     try {
         connection = await getDB();
 
-        // Destructuramos el id del producto
-        const { idProduct } = req.params;
+        const { idPhoto } = req.params;
 
-        // Vamos a permitir un máximo de 5 fotos por producto
-        // Comprobamos cuantas fotos tiene ya el producto
         const [photos] = await connection.query(
-            `SELECT * FROM product_photo WHERE idProduct = ?`,
-            [idProduct]
+            `SELECT * FROM photo WHERE idPhoto = ?`,
+            [idPhoto]
         );
 
-        // Si nos devuelve 5 o más fotos para ese producto, lanzamos un error
         if (photos.length >= 5) {
-            throw generateError(
-                '¡El producto ya tiene el máximo de 5 fotos asignadas!',
-                403
-            ); // Forbidden
+            throw generateError('¡Ya tienes 5 fotos subidas!', 403);
         }
 
-        // Comprobamos que nos ha enviado una foto nueva para añadir
-        if (!req.files || !req.files.productPhoto) {
-            throw generateError(
-                '¡Debes indicar una nueva foto de producto!',
-                400
-            ); // Bad Request
+        if (!req.files || !req.files.photo) {
+            throw generateError('¡Debes subir una nueva foto!', 400);
         }
 
-        // Ejecutamos la funcion savePhoto para guardar en el servidor la nueva foto de producto
-        // y guardamos en la variable photoName el nombre de la imagen que devuelve la función
-        const photoName = await savePhoto(req.files.productPhoto, 1); // 1 -> indica que lo guardamos en static/product
+        const photoName = await savePhoto(req.files.photo, savePhoto);
 
-        // Insertamos el nombre de la nueva foto
         await connection.query(
-            `INSERT INTO product_photo (name, idProduct)
+            `INSERT INTO photo (name, idPhoto, caption)
             VALUES (?, ?)`,
-            [photoName, idProduct]
+            [photoName, idPhoto, caption]
         );
 
-        // Respondemos
         res.send({
             status: 'Ok',
-            message: '¡Foto de producto añadida con éxito!',
+            message: '¡Foto subida con éxito!',
         });
     } catch (error) {
         next(error);
@@ -61,4 +41,4 @@ const addProductPhoto = async (req, res, next) => {
     }
 };
 
-module.exports = addProductPhoto;
+module.exports = addPhoto;

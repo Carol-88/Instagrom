@@ -26,30 +26,43 @@ app.use(fileUpload());
     ###################
 */
 
+const isAuth = require('./middlewares/isAuth');
+
 /* 
     #################################
     ### Controladores de Usuarios ###
     #################################
 */
 const newUser = require('./controllers/users/newUsers');
+const loginUser = require('./controllers/users/login');
+const validateUser = require('./controllers/users/validateUser');
 /* 
     ##########################
     ### Endpoints Usuarios ###
     ##########################
 */
-// Registro de usuario
+
 app.post('/register', newUser);
+app.post('/login', loginUser);
+app.post('/validate/:registrationCode', validateUser);
+
 /* 
     ##################################
     ##### Controladores de fotos #####
     ##################################
 */
 
+const addPhoto = require('./controllers/posts/addPhoto');
+const deletePhoto = require('./controllers/posts/deletePhoto');
+
 /* 
     ##############################
     ##### Endpoints de fotos #####
     ##############################
 */
+
+app.put('/addPhoto', isAuth, addPhoto);
+app.put('/deletePhoto', isAuth, deletePhoto);
 
 /* 
     ##############################
