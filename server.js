@@ -1,8 +1,8 @@
-const express = require("express");
-const morgan = require("morgan");
-require("dotenv").config();
-const fileUpload = require("express-fileupload");
-const cors = require("cors");
+const express = require('express');
+const morgan = require('morgan');
+require('dotenv').config();
+const fileUpload = require('express-fileupload');
+const cors = require('cors');
 
 // Creamos el servidor
 const app = express();
@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 // Middleware de Morgan para obtener más información sobre cada una de las peticiones
-app.use(morgan("dev"));
+app.use(morgan('dev'));
 
 // Middleware para leer el body en formato form-data (para leer archivos e imágenes)
 // instalación -> npm i express-fileupload
@@ -31,13 +31,14 @@ app.use(fileUpload());
     ### Controladores de Usuarios ###
     #################################
 */
-
+const newUser = require('./controllers/users/newUsers');
 /* 
     ##########################
     ### Endpoints Usuarios ###
     ##########################
 */
-
+// Registro de usuario
+app.post('/register', newUser);
 /* 
     ##################################
     ##### Controladores de fotos #####
@@ -64,26 +65,26 @@ app.use(fileUpload());
 
 // Middleware de Error
 app.use((error, req, res, _) => {
-  console.error(error);
+    console.error(error);
 
-  res.status(error.httpStatus || 500);
+    res.status(error.httpStatus || 500);
 
-  res.send({
-    status: "Error",
-    message: error.message,
-  });
+    res.send({
+        status: 'Error',
+        message: error.message,
+    });
 });
 
 // Middleware de Not Found
 app.use((req, res) => {
-  res.status(404);
+    res.status(404);
 
-  res.send({
-    status: "Error",
-    message: "Not found",
-  });
+    res.send({
+        status: 'Error',
+        message: 'Not found',
+    });
 });
 
 app.listen(process.env.PORT, () => {
-  console.log(`Server listening at http://localhost:${process.env.PORT}`);
+    console.log(`Server listening at http://localhost:${process.env.PORT}`);
 });

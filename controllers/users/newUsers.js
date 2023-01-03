@@ -1,11 +1,9 @@
 const getDB = require("../../db/getDB");
-/*
-const {
-  generateError,
-  generateRandomCode,
-  verifyEmail,
-} = require("../../helpers");
-*/
+
+const {generateError} = require("../../helpers/error");
+const {randomCode} = require("../../helpers/randomCode");
+const {verifyEmail} = require("../../helpers/verifyEmail");
+
 const bcrypt = require("bcrypt");
 
 const saltRounds = 10;
@@ -45,7 +43,7 @@ const newUser = async (req, res, next) => {
 
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    const registrationCode = generateRandomCode(40);
+    const registrationCode = randomCode(40);
 
     await connection.query(
       `INSERT INTO user (username, email, password, registrationCode) VALUES (?, ?, ?, ?)`,

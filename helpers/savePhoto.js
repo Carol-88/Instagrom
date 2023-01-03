@@ -32,4 +32,4 @@ async function savePhoto(imagen, type) {
     }
 }
 
-module.exports = savePhoto();
+module.exports = savePhoto;
