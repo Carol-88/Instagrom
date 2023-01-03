@@ -38,14 +38,36 @@ app.use(fileUpload());
     ##########################
 */
 
+/* 
+    ##################################
+    ##### Controladores de fotos #####
+    ##################################
+*/
+
+/* 
+    ##############################
+    ##### Endpoints de fotos #####
+    ##############################
+*/
+
+/* 
+    ##############################
+    ### Controladores de likes ###
+    ##############################
+*/
+
+/* 
+    ##########################
+    ### Endpoints de likes ###
+    ##########################
+*/
+
 // Middleware de Error
 app.use((error, req, res, _) => {
   console.error(error);
 
-  // Establecemos el codigo del error
   res.status(error.httpStatus || 500);
 
-  // Respondemos
   res.send({
     status: "Error",
     message: error.message,
@@ -54,17 +76,14 @@ app.use((error, req, res, _) => {
 
 // Middleware de Not Found
 app.use((req, res) => {
-  // Establecemos el codigo de error 404
   res.status(404);
 
-  // Respondemos
   res.send({
     status: "Error",
     message: "Not found",
   });
 });
 
-// Ponemos el servidor a la escucha
 app.listen(process.env.PORT, () => {
   console.log(`Server listening at http://localhost:${process.env.PORT}`);
 });
