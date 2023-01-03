@@ -1,9 +1,11 @@
 const getDB = require("../../db/getDB");
+/*
 const {
   generateError,
   generateRandomCode,
   verifyEmail,
 } = require("../../helpers");
+*/
 const bcrypt = require("bcrypt");
 
 const saltRounds = 10;

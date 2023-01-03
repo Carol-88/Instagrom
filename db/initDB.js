@@ -1,4 +1,4 @@
-const getDB = require(`./getDB`);
+const getDB = require('./getDB');
 
 async function main() {
   let connection;

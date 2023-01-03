@@ -4,6 +4,4 @@ function generateError(message, code) {
   return error;
 }
 
-module.exports = {
-  generateError,
-};
+module.exports =  generateError();

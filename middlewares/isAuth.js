@@ -1,7 +1,7 @@
 //Comprobamos si el usuario ha iniciado sesión o no
 
 const getDB = require("../db/getDB");
-const { generateError } = require("../helpers");
+const { generateError } = require("../helpers/error");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 

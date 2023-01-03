@@ -1,5 +1,5 @@
 const getDB = require("../../db/getDB");
-const { generateError } = require("../../helpers");
+const { generateError } = require("../../helpers/error");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();

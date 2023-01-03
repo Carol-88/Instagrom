@@ -1,5 +1,5 @@
 const getDB = require("../../db/getDB");
-const { generateError } = require("../../helpers");
+const { generateError } = require("../../helpers/error");
 
 const validateUser = async (req, res, next) => {
   let connection;
