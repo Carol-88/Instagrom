@@ -1,7 +1,6 @@
 const getDB = require('../db/getDB');
-const { generateError } = require('../helpers/error');
+const { generateError } = require('../helpers');
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
 
 const isAuth = async (req, res, next) => {
     let connection;

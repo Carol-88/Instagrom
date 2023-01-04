@@ -1,8 +1,10 @@
 const getDB = require('../../db/getDB');
 
-const { generateError } = require('../../helpers/error');
-const { randomCode } = require('../../helpers/randomCode');
-const { verifyEmail } = require('../../helpers/verifyEmail');
+const {
+    generateError,
+    generateRandomCode,
+    verifyEmail,
+} = require('../../helpers');
 
 const bcrypt = require('bcrypt');
 
@@ -46,14 +48,16 @@ const newUser = async (req, res, next) => {
 
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        const registrationCode = randomCode(40);
+        const registrationCode = generateRandomCode(40);
 
         await connection.query(
             `INSERT INTO user (username, email, password, registrationCode) VALUES (?, ?, ?, ?)`,
             [username, email, hashedPassword, registrationCode]
         );
 
-        await verifyEmail(email, registrationCode);
+        // await verifyEmail(email, registrationCode);
+
+        //Poner las claves de Sengrid
 
         res.send({
             status: 'Ok',

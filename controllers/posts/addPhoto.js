@@ -1,5 +1,5 @@
 const getDB = require('../../db/getDB');
-const { generateError } = require('../../helpers/error');
+const { generateError } = require('../../helpers');
 
 const addPhoto = async (req, res, next) => {
     let connection;

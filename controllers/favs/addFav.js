@@ -1,48 +1,49 @@
-const getDB = require("../../db/getDB");
-const { generateError } = require("../../helpers/error");
+const getDB = require('../../db/getDB');
+const { generateError } = require('../../helpers');
 
 const addFavPhoto = async (req, res, next) => {
-  let connection;
+    let connection;
 
-  try {
-    connection = await getDB();
+    try {
+        connection = await getDB();
 
-    const idUserAuth = req.userAuth.id;
+        const idUserAuth = req.userAuth.id;
 
-    const { idPhoto } = req.params;
+        const { idPhoto } = req.params;
 
-    const [photo] = await connection.query(`SELECT * FROM photo WHERE id = ?`, [
-      idPhoto,
-    ]);
+        const [photo] = await connection.query(
+            `SELECT * FROM photo WHERE id = ?`,
+            [idPhoto]
+        );
 
-    if (photo[0].idUser === idUserAuth) {
-      throw generateError("No puedes añadir a favoritos tus fotos", 409);
-    }
+        if (photo[0].idUser === idUserAuth) {
+            throw generateError('No puedes añadir a favoritos tus fotos', 409);
+        }
 
-    const [like] = await connection.query(
-      `SELECT * FROM user_like_photo WHERE idUser = ? AND idPhoto = ?`,
-      [idUserAuth, idPhoto]
-    );
+        const [like] = await connection.query(
+            `SELECT * FROM user_like_photo WHERE idUser = ? AND idPhoto = ?`,
+            [idUserAuth, idPhoto]
+        );
 
-    if (like.length > 0) {
-      throw generateError("¡Esa foto ya tiene like!", 409);
-    }
+        if (like.length > 0) {
+            throw generateError('¡Esa foto ya tiene like!', 409);
+        }
 
-    await connection.query(
-      `INSERT INTO user_like_photo (idUser, idPhoto)
+        await connection.query(
+            `INSERT INTO user_like_photo (idUser, idPhoto)
             VALUES (?, ?)`,
-      [idUserAuth, idPhoto]
-    );
+            [idUserAuth, idPhoto]
+        );
 
-    res.send({
-      status: "Ok",
-      message: `¡Foto con like!`,
-    });
-  } catch (error) {
-    next(error);
-  } finally {
-    if (connection) connection.release();
-  }
+        res.send({
+            status: 'Ok',
+            message: `¡Foto con like!`,
+        });
+    } catch (error) {
+        next(error);
+    } finally {
+        if (connection) connection.release();
+    }
 };
 
 module.exports = addFavPhoto;

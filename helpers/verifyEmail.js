@@ -1,16 +1,12 @@
 const sgMail = require('@sendgrid/mail');
 require('dotenv').config();
 
-
 const { SENDGRID_API_KEY, SENDGRID_FROM, PORT } = process.env;
-
 
 sgMail.setApiKey(SENDGRID_API_KEY);
 
-
-async function sendMail({ to, subject, body }) {
+async function sendEmail({ to, subject, body }) {
     try {
-       
         const msg = {
             to,
             from: SENDGRID_FROM,
@@ -28,16 +24,13 @@ async function sendMail({ to, subject, body }) {
             `,
         };
 
-        
         await sgMail.send(msg);
     } catch (error) {
         throw new Error('Hubo un problema al enviar el email.');
     }
 }
 
-
 async function verifyEmail(email, registrationCode) {
-   
     const emailBody = `
         <h2>Bienvenido a Mini-Wallapop</h2>
         <p>Haz click en el siguiente enlace para verificar y activar tu cuenta :D</p>
@@ -48,8 +41,7 @@ async function verifyEmail(email, registrationCode) {
         </p>
     `;
 
-
-    await sendMail({
+    await sendEmail({
         to: email,
         subject: 'Activa tu cuenta',
         body: emailBody,

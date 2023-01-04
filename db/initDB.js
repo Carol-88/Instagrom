@@ -27,7 +27,7 @@ async function main() {
             avatar VARCHAR(255),
             registrationCode VARCHAR(250),
             active TINYINT DEFAULT 0,
-            birthday DATE,
+            birthday DATE
         )`
         );
 
@@ -63,10 +63,10 @@ async function main() {
         );
 
         await connection.query(
-            `INSERT INTO photo(location, caption, idUser)
-        VALUES ('Madrid', 'Celebrando Año Nuevo', 1),
-        ('Vigo', 'Viendo las luces', 1),
-        ('Alicante', 'Por aquí de vuelta', 1)`
+            `INSERT INTO photo (photoName, location, caption, idUser)
+        VALUES ('Madrid.jpg', 'Madrid', 'Celebrando Año Nuevo', 1),
+        ('Vigo.jpg', 'Vigo', 'Viendo las luces', 1),
+        ('Alicante.jpg', 'Alicante', 'Por aquí de vuelta', 1)`
         );
 
         console.log('¡Datos de prueba insertados con éxito!');
