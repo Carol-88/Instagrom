@@ -1,0 +1,91 @@
+{
+    "info": {
+        "_postman_id": "ce914330-4459-4444-a411-f02bfbf62148",
+        "name": "Instagrom",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_exporter_id": "24890795"
+    },
+    "item": [
+        {
+            "name": "Registro de usuario",
+            "request": {
+                "method": "GET",
+                "header": []
+            },
+            "response": []
+        },
+        {
+            "name": "Login de usuario",
+            "request": {
+                "method": "GET",
+                "header": []
+            },
+            "response": []
+        },
+        {
+            "name": "Validar usuario",
+            "request": {
+                "method": "GET",
+                "header": []
+            },
+            "response": []
+        },
+        {
+            "name": "Añadir foto",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "{{token}}",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "formdata",
+                    "formdata": [
+                        {
+                            "key": "perrito",
+                            "type": "file",
+                            "src": "/C:/Users/punks/Downloads/IMG_0299.JPG"
+                        }
+                    ]
+                },
+                "url": {
+                    "raw": "{{server}}/addPhoto",
+                    "host": ["{{server}}"],
+                    "path": ["addPhoto"]
+                }
+            },
+            "response": []
+        }
+    ],
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [""]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "exec": [""]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "server",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "registrationCode",
+            "value": "",
+            "type": "string"
+        }
+    ]
+}
