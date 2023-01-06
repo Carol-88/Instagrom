@@ -1,7 +1,7 @@
 const getDB = require('../../db/getDB');
-const { deletePhoto } = require('../../helpers');
+const { deletePhotoFile } = require('../../helpers');
 
-const deleteProduct = async (req, res, next) => {
+const deletePhoto = async (req, res, next) => {
     let connection;
 
     try {
@@ -33,4 +33,4 @@ const deleteProduct = async (req, res, next) => {
     }
 };
 
-module.exports = deleteProduct;
+module.exports = deletePhoto;

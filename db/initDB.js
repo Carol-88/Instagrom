@@ -37,6 +37,7 @@ async function main() {
             photoName VARCHAR(500) NOT NULL,
             location VARCHAR(100),
             caption VARCHAR(500),
+            publication_date DATE NOT NULL,
             idUser INT UNSIGNED NOT NULL,
             FOREIGN KEY (idUser) REFERENCES user(id)
         )`

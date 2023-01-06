@@ -33,9 +33,10 @@ const isAuth = require('./middlewares/isAuth');
     ### Controladores de Usuarios ###
     #################################
 */
-const newUser = require('./controllers/users/newUsers');
+const newUser = require('./controllers/users/newUser');
 const loginUser = require('./controllers/users/login');
 const validateUser = require('./controllers/users/validateUser');
+
 /* 
     ##########################
     ### Endpoints Usuarios ###
@@ -54,6 +55,9 @@ app.post('/validate/:registrationCode', validateUser);
 
 const addPhoto = require('./controllers/posts/addPhoto');
 const deletePhoto = require('./controllers/posts/deletePhoto');
+const photoByUser = require('./controllers/posts/photoByUser');
+const photoByCaption = require('./controllers/posts/photoByCaption');
+const photoByDate = require('./controllers/posts/photoByDate');
 
 /* 
     ##############################
@@ -61,8 +65,11 @@ const deletePhoto = require('./controllers/posts/deletePhoto');
     ##############################
 */
 
-app.put('/addPhoto', isAuth, addPhoto);
+app.post('/addPhoto', addPhoto);
 app.put('/deletePhoto', isAuth, deletePhoto);
+app.post('/foundPhoto', photoByUser);
+app.post('/foundCaption', photoByCaption);
+app.post('/foundDate', photoByDate);
 
 /* 
     ##############################

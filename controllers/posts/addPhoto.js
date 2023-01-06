@@ -7,27 +7,14 @@ const addPhoto = async (req, res, next) => {
     try {
         connection = await getDB();
 
-        const { idPhoto } = req.params;
+        const { photoName, id, caption, idUser } = req.body;
 
-        const [photos] = await connection.query(
-            `SELECT * FROM photo WHERE idPhoto = ?`,
-            [idPhoto]
-        );
-
-        if (photos.length >= 5) {
-            throw generateError('¡Ya tienes 5 fotos subidas!', 403);
-        }
-
-        if (!req.files || !req.files.photo) {
-            throw generateError('¡Debes subir una nueva foto!', 400);
-        }
-
-        const photoName = await savePhoto(req.files.photo, savePhoto);
+        // const photoName = await savePhoto(req.files.photo, savePhoto);
 
         await connection.query(
-            `INSERT INTO photo (name, idPhoto, caption)
-            VALUES (?, ?)`,
-            [photoName, idPhoto, caption]
+            `INSERT INTO photo (photoName, id, caption, idUser)
+            VALUES (?, ?, ?, ?)`,
+            [photoName, id, caption, idUser]
         );
 
         res.send({

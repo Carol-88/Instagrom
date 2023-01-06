@@ -32,7 +32,7 @@ async function sendEmail({ to, subject, body }) {
 
 async function verifyEmail(email, registrationCode) {
     const emailBody = `
-        <h2>Bienvenido a Mini-Wallapop</h2>
+        <h2>Bienvenido a Instagrom</h2>
         <p>Haz click en el siguiente enlace para verificar y activar tu cuenta :D</p>
         <p>
             <a href="http://localhost:${PORT}/validate/${registrationCode}">

@@ -57,8 +57,6 @@ const newUser = async (req, res, next) => {
 
         await verifyEmail(email, registrationCode);
 
-        //Poner las claves de Sengrid
-
         res.send({
             status: 'Ok',
             message:
