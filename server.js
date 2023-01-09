@@ -33,7 +33,7 @@ const isAuth = require('./middlewares/isAuth');
     ### Controladores de Usuarios ###
     #################################
 */
-const newUser = require('./controllers/users/newUser');
+const newUser = require('./controllers/users/newUsers');
 const loginUser = require('./controllers/users/login');
 const validateUser = require('./controllers/users/validateUser');
 
@@ -43,9 +43,13 @@ const validateUser = require('./controllers/users/validateUser');
     ##########################
 */
 
-app.post('/register', newUser);
+app.post('/register', newUser); //no envia email, si registra usuario
 app.post('/login', loginUser);
-app.post('/validate/:registrationCode', validateUser);
+/* da error {
+    "status": "Error",
+    "message": "\"expiresIN\" is not allowed in \"options\""
+}*/
+app.post('/validate/:registrationCode', validateUser); //no activa usuario, lo hice manualmente con workbench
 
 /* 
     ##################################
@@ -55,9 +59,9 @@ app.post('/validate/:registrationCode', validateUser);
 
 const addPhoto = require('./controllers/posts/addPhoto');
 const deletePhoto = require('./controllers/posts/deletePhoto');
-const photoByUser = require('./controllers/posts/photoByUser');
 const photoByCaption = require('./controllers/posts/photoByCaption');
 const photoByDate = require('./controllers/posts/photoByDate');
+const photoByUser = require('./controllers/posts/photoByUser');
 
 /* 
     ##############################
@@ -65,11 +69,11 @@ const photoByDate = require('./controllers/posts/photoByDate');
     ##############################
 */
 
-app.post('/addPhoto', addPhoto);
-app.put('/deletePhoto', isAuth, deletePhoto);
-app.post('/foundPhoto', photoByUser);
-app.post('/foundCaption', photoByCaption);
-app.post('/foundDate', photoByDate);
+app.put('/addPhoto', isAuth, addPhoto); //no se puebe probar
+app.put('/deletePhoto', isAuth, deletePhoto); //no se puebe probar
+app.post('/search/caption', photoByCaption);
+app.post('/search/date', photoByDate);
+app.post('search/user', photoByUser);
 
 /* 
     ##############################
@@ -77,11 +81,15 @@ app.post('/foundDate', photoByDate);
     ##############################
 */
 
+const addFavPhoto = require('./controllers/favs/addFav');
+
 /* 
     ##########################
     ### Endpoints de likes ###
     ##########################
 */
+
+app.post('/products/:idProduct/like', isAuth, addFavPhoto);
 
 // Middleware de Error
 app.use((error, req, res, _) => {
