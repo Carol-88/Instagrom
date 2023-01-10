@@ -82,6 +82,7 @@ app.get('/search/:user', photoByUser);
 */
 
 const addFavPhoto = require('./controllers/favs/addFav');
+const deleteFavPhoto = require('./controllers/favs/deleteFav');
 
 /* 
     ##########################
@@ -90,6 +91,7 @@ const addFavPhoto = require('./controllers/favs/addFav');
 */
 
 app.post('/favs/:idPhoto/like', isAuth, addFavPhoto);
+app.delete('/favs/:idPhoto/unlike', isAuth, deleteFavPhoto);
 
 // Middleware de Error
 app.use((error, req, res, _) => {
