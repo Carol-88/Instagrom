@@ -1,0 +1,14 @@
+const Joi = require('joi');
+
+const newDateSchema = Joi.object().keys({
+    birthday: Joi.date()
+        .format('YYYY/MM/DD')
+        .required()
+        .error((errors) => {
+            if (errors[0].code === 'any.required') {
+                return new Error('¡El formato de fecha es incorrecto!');
+            }
+        }),
+});
+
+module.exports = newDateSchema;

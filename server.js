@@ -36,6 +36,7 @@ const isAuth = require('./middlewares/isAuth');
 const newUser = require('./controllers/users/newUser');
 const loginUser = require('./controllers/users/login');
 const validateUser = require('./controllers/users/validateUser');
+const getProfile = require('./controllers/users/getProfile');
 
 /* 
     ##########################
@@ -43,13 +44,10 @@ const validateUser = require('./controllers/users/validateUser');
     ##########################
 */
 
-app.post('/register', newUser); //no envia email, si registra usuario
+app.post('/register', newUser);
 app.post('/login', loginUser);
-/* da error {
-    "status": "Error",
-    "message": "\"expiresIN\" is not allowed in \"options\""
-}*/
-app.post('/validate/:registrationCode', validateUser); //no activa usuario, lo hice manualmente con workbench
+app.post('/validate/:registrationCode', validateUser);
+app.get('/profile/:idUser', getProfile);
 
 /* 
     ##################################
@@ -59,9 +57,7 @@ app.post('/validate/:registrationCode', validateUser); //no activa usuario, lo h
 
 const addPhoto = require('./controllers/posts/addPhoto');
 const deletePhoto = require('./controllers/posts/deletePhoto');
-const photoByCaption = require('./controllers/posts/photoByCaption');
-const photoByDate = require('./controllers/posts/photoByDate');
-const photoByUser = require('./controllers/posts/photoByUser');
+const getPhotos = require('./controllers/posts/getPhotos');
 
 /* 
     ##############################
@@ -71,9 +67,7 @@ const photoByUser = require('./controllers/posts/photoByUser');
 
 app.post('/addPhoto', isAuth, addPhoto);
 app.delete('/deletePhoto', isAuth, deletePhoto);
-app.get('/search/:caption', photoByCaption);
-app.get('/search/:publication_date', photoByDate);
-app.get('/search/:user', photoByUser);
+app.get('/photos', getPhotos);
 
 /* 
     ##############################

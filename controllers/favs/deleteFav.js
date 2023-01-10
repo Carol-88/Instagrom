@@ -7,33 +7,35 @@ const deleteFavPhoto = async (req, res, next) => {
     try {
         connection = await getDB();
 
-        // Recuperar el id del usuario logueado
         const idUserAuth = req.userAuth.id;
 
-        // Destructurar el id del producto por path params
         const { idPhoto } = req.params;
-
-        // Consultamos a la base de datos si el producto ha sido marcado por el usuario como favorito
-        const [like] = await connection.query(
-            `SELECT * FROM user_like_product WHERE idUser = ? AND idPhoto = ?`,
-            [idUserAuth, idPhoto]
+        const [[photo]] = await connection.query(
+            'SELECT * FROM photo WHERE id = ?',
+            [idPhoto]
         );
 
-        // Si la consulta NO devuelve ningún valor, el producto NO está en favoritos
-        if (like.length < 1) {
-            throw generateError('¡La foto no consta como favorita!', 404); // Not Found
+        if (!photo) {
+            throw generateError('¡La foto no existe!', 404);
         }
 
-        // Si el producto está marcado como favorito, lo eliminamos
-        await connection.query(
-            `DELETE FROM user_like_product WHERE idUser = ? AND idPhoto = ?`,
+        const [like] = await connection.query(
+            `SELECT * FROM user_like_photo WHERE idUser = ? AND idPhoto = ?`,
             [idUserAuth, idPhoto]
         );
 
-        // Respondemos
+        if (like.length < 1) {
+            throw generateError('¡La foto no consta como favorita!', 404);
+        }
+
+        await connection.query(
+            `DELETE FROM user_like_photo WHERE idUser = ? AND idPhoto = ?`,
+            [idUserAuth, idPhoto]
+        );
+
         res.send({
             status: 'Ok',
-            message: '¡Foto eliminada de favoritos!',
+            message: '¡Like eliminado!',
         });
     } catch (error) {
         next(error);
@@ -43,4 +45,3 @@ const deleteFavPhoto = async (req, res, next) => {
 };
 
 module.exports = deleteFavPhoto;
-

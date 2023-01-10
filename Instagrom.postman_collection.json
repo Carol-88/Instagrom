@@ -1,91 +1,306 @@
 {
-    "info": {
-        "_postman_id": "ce914330-4459-4444-a411-f02bfbf62148",
-        "name": "Instagrom",
-        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-        "_exporter_id": "24890795"
-    },
-    "item": [
-        {
-            "name": "Registro de usuario",
-            "request": {
-                "method": "GET",
-                "header": []
-            },
-            "response": []
-        },
-        {
-            "name": "Login de usuario",
-            "request": {
-                "method": "GET",
-                "header": []
-            },
-            "response": []
-        },
-        {
-            "name": "Validar usuario",
-            "request": {
-                "method": "GET",
-                "header": []
-            },
-            "response": []
-        },
-        {
-            "name": "Añadir foto",
-            "request": {
-                "method": "PUT",
-                "header": [
-                    {
-                        "key": "Authorization",
-                        "value": "{{token}}",
-                        "type": "text"
-                    }
-                ],
-                "body": {
-                    "mode": "formdata",
-                    "formdata": [
-                        {
-                            "key": "perrito",
-                            "type": "file",
-                            "src": "/C:/Users/punks/Downloads/IMG_0299.JPG"
-                        }
-                    ]
-                },
-                "url": {
-                    "raw": "{{server}}/addPhoto",
-                    "host": ["{{server}}"],
-                    "path": ["addPhoto"]
-                }
-            },
-            "response": []
-        }
-    ],
-    "event": [
-        {
-            "listen": "prerequest",
-            "script": {
-                "type": "text/javascript",
-                "exec": [""]
-            }
-        },
-        {
-            "listen": "test",
-            "script": {
-                "type": "text/javascript",
-                "exec": [""]
-            }
-        }
-    ],
-    "variable": [
-        {
-            "key": "server",
-            "value": "",
-            "type": "string"
-        },
-        {
-            "key": "registrationCode",
-            "value": "",
-            "type": "string"
-        }
-    ]
+	"info": {
+		"_postman_id": "2b08fce5-1754-4c0f-ab38-5f34bc806a53",
+		"name": "Instagrom",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Registro de usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"username\": \"Marta\", \"email\": \"marta@hotmail.com\", \"password\": \"marta123\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validar usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"email\": \"marta@hotmail.com\", \"password\": \"marta123\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/validate/:registrationCode?registrationCode=d7c67ea5b815745dfa00a41fdeb22c98ad72edf58cd06fd924d5b689a24ca65f34d4cab1e3e47d86",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"validate",
+						":registrationCode"
+					],
+					"query": [
+						{
+							"key": "registrationCode",
+							"value": "d7c67ea5b815745dfa00a41fdeb22c98ad72edf58cd06fd924d5b689a24ca65f34d4cab1e3e47d86"
+						}
+					],
+					"variable": [
+						{
+							"key": "registrationCode",
+							"value": "7fc9988698192f062c5d7ad752028bd0647a7bad38148a042e91d731d3cd98c8149edd2b32a5bfa7"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login de usuario",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"email\": \"marta@hotmail.com\", \"password\": \"marta123\" }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Añadir foto",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "photoName",
+							"value": "Madrid",
+							"type": "default"
+						},
+						{
+							"key": "caption",
+							"value": "Celebrando Año Nuevo",
+							"type": "default"
+						},
+						{
+							"key": "photo",
+							"type": "file",
+							"src": "/C:/Users/marty/OneDrive/Escritorio/1.jpg"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/addPhoto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"addPhoto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar foto",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token3}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4000/favs/1/unlike",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"favs",
+						"1",
+						"unlike"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Like foto",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token3}}",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4000/favs/1/like",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"favs",
+						"1",
+						"like"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ver fotos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/photos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"photos"
+					],
+					"query": [
+						{
+							"key": "caption",
+							"value": "Año",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ver perfil",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/profile/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"profile",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "server",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "registrationCode",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "token2",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "token3",
+			"value": "",
+			"type": "default"
+		}
+	]
 }
