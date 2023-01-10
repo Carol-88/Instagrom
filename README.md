@@ -23,16 +23,16 @@ _CREATE DATABASE IF NOT EXISTS instagrom;_
 
 ########## Usuarios anónimos
 
-Ver las últimas fotos publicadas por otros usuarios ✅
-Ver el perfil de un usuario con su galería de fotos ✅
-Buscar fotos (por su texto descriptivo) ✅
-Login ✅
-Registro ✅
+- Ver las últimas fotos publicadas por otros usuarios ✅
+- Ver el perfil de un usuario con su galería de fotos ✅
+- Buscar fotos (por su texto descriptivo) ✅
+- Login ✅
+- Registro ✅
 
 ########## Usuarios registrados
 
-Hacer una publicación de una foto (la foto debe ajustarse automáticamente a un tamaño máximo y unas proporciones establecidas por la plataforma), y añadirle una descripción ✅
-Hacer/Quitar un “like” a una foto ✅
+- Hacer una publicación de una foto (la foto debe ajustarse automáticamente a un tamaño máximo y unas proporciones establecidas por la plataforma), y añadirle una descripción ✅
+- Hacer/Quitar un “like” a una foto ✅
 
 ########## Opcional:
 
