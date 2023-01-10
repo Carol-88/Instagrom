@@ -9,8 +9,6 @@ const photoByDate = async (req, res, next) => {
 
         const { username } = req.params;
 
-        // El username llega sin valor
-
         const [user] = await connection.query(
             `SELECT * FROM user WHERE username = ?`,
             [username]

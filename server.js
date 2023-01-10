@@ -69,10 +69,10 @@ const photoByUser = require('./controllers/posts/photoByUser');
     ##############################
 */
 
-app.post('/addPhoto', isAuth, addPhoto); //no se puebe probar
-app.delete('/deletePhoto', isAuth, deletePhoto); //no se puebe probar
+app.post('/addPhoto', isAuth, addPhoto);
+app.delete('/deletePhoto', isAuth, deletePhoto);
 app.get('/search/:caption', photoByCaption);
-app.get('/search/:date', photoByDate);
+app.get('/search/:publication_date', photoByDate);
 app.get('/search/:user', photoByUser);
 
 /* 
@@ -89,7 +89,7 @@ const addFavPhoto = require('./controllers/favs/addFav');
     ##########################
 */
 
-app.post('/products/:idProduct/like', isAuth, addFavPhoto);
+app.post('/favs/:idPhoto/like', isAuth, addFavPhoto);
 
 // Middleware de Error
 app.use((error, req, res, _) => {

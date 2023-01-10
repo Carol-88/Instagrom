@@ -7,20 +7,18 @@ const deletePhoto = async (req, res, next) => {
     try {
         connection = await getDB();
 
-        const { idPhoto } = req.params;
+        const { id } = req.params;
 
         const [photos] = await connection.query(
-            `SELECT photoName FROM photo WHERE idPhoto = ?`,
-            [idPhoto]
+            `SELECT photoName FROM photo WHERE id = ?`,
+            [id]
         );
 
         for (let i = 0; i < photos.length; i++) {
             await deletePhoto(photos[i].name, './photos');
         }
 
-        await connection.query(`DELETE FROM photo WHERE idPhoto = ?`, [
-            idPhoto,
-        ]);
+        await connection.query(`DELETE FROM photo WHERE id = ?`, [id]);
 
         res.send({
             status: 'Ok',

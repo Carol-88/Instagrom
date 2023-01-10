@@ -17,7 +17,10 @@ const addFavPhoto = async (req, res, next) => {
         );
 
         if (photo[0].idUser === idUserAuth) {
-            throw generateError('No puedes añadir a favoritos tus fotos', 409);
+            throw generateError(
+                'No le puedes dar like a tus propias fotos',
+                409
+            );
         }
 
         const [like] = await connection.query(
