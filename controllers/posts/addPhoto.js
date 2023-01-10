@@ -1,5 +1,5 @@
 const getDB = require('../../db/getDB');
-const { generateError } = require('../../helpers');
+const { savePhoto } = require('../../helpers');
 
 const addPhoto = async (req, res, next) => {
     let connection;
@@ -7,14 +7,14 @@ const addPhoto = async (req, res, next) => {
     try {
         connection = await getDB();
 
-        const { photoName, id, caption, idUser } = req.body;
+        const { caption } = req.body;
 
-        // const photoName = await savePhoto(req.files.photo, savePhoto);
+        const photoName = await savePhoto(req.files.photo);
 
         await connection.query(
-            `INSERT INTO photo (photoName, id, caption, idUser)
-            VALUES (?, ?, ?, ?)`,
-            [photoName, id, caption, idUser]
+            `INSERT INTO photo (photoName, caption, idUser)
+            VALUES (?, ?, ?)`,
+            [photoName, caption, req.userAuth.id]
         );
 
         res.send({

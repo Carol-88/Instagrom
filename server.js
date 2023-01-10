@@ -33,7 +33,7 @@ const isAuth = require('./middlewares/isAuth');
     ### Controladores de Usuarios ###
     #################################
 */
-const newUser = require('./controllers/users/newUsers');
+const newUser = require('./controllers/users/newUser');
 const loginUser = require('./controllers/users/login');
 const validateUser = require('./controllers/users/validateUser');
 
@@ -69,11 +69,11 @@ const photoByUser = require('./controllers/posts/photoByUser');
     ##############################
 */
 
-app.put('/addPhoto', isAuth, addPhoto); //no se puebe probar
-app.put('/deletePhoto', isAuth, deletePhoto); //no se puebe probar
-app.post('/search/caption', photoByCaption);
-app.post('/search/date', photoByDate);
-app.post('search/user', photoByUser);
+app.post('/addPhoto', isAuth, addPhoto); //no se puebe probar
+app.delete('/deletePhoto', isAuth, deletePhoto); //no se puebe probar
+app.get('/search/:caption', photoByCaption);
+app.get('/search/:date', photoByDate);
+app.get('/search/:user', photoByUser);
 
 /* 
     ##############################
