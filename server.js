@@ -3,6 +3,7 @@ const morgan = require('morgan');
 require('dotenv').config();
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
+const path = require('path');
 
 // Creamos el servidor
 const app = express();
@@ -108,6 +109,8 @@ app.use((req, res) => {
         message: 'Not found',
     });
 });
+
+// app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.listen(process.env.PORT, () => {
     console.log(`Server listening at http://localhost:${process.env.PORT}`);

@@ -2,7 +2,7 @@ const path = require('path');
 const sharp = require('sharp');
 const uuid = require('uuid');
 
-const photosDir = path.join(__dirname, '../photos');
+const photosDir = path.join(__dirname, 'static', 'photos');
 
 async function savePhoto(imagen) {
     try {
