@@ -34,7 +34,7 @@ async function main() {
         await connection.query(
             `CREATE TABLE IF NOT EXISTS photo (
             id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-            photoName VARCHAR(500) NOT NULL,
+            photoName VARCHAR(500),
             location VARCHAR(100),
             caption VARCHAR(500),
             publication_date TIMESTAMP NOT NULL DEFAULT NOW(),
