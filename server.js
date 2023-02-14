@@ -47,7 +47,7 @@ const getProfile = require('./controllers/users/getProfile');
 
 app.post('/register', newUser);
 app.post('/login', loginUser);
-app.post('/validate/:registrationCode', validateUser);
+app.get('/validate/:registrationCode', validateUser);
 app.get('/profile/:idUser', getProfile);
 
 /* 

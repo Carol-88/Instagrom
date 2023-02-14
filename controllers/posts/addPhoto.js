@@ -21,6 +21,9 @@ const addPhoto = async (req, res, next) => {
             status: 'Ok',
             message: '¡Foto subida con éxito!',
         });
+        if (!req.files?.photo) {
+            throw generateError('¡Debes subir una foto!', 400);
+        }
     } catch (error) {
         next(error);
     } finally {
