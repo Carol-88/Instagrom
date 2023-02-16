@@ -2,7 +2,7 @@ const path = require('path');
 const sharp = require('sharp');
 const uuid = require('uuid');
 
-const photosDir = path.join(__dirname, '../photos');
+const photosDir = path.join(__dirname, 'static', 'photos');
 
 async function savePhoto(imagen) {
     try {
@@ -16,7 +16,7 @@ async function savePhoto(imagen) {
 
         sharpImage.toFile(photoPath);
 
-        return imageName;
+        return photoPath;
     } catch (error) {
         throw new Error('¡Ha ocurrido un error al procesar la imagen!');
     }

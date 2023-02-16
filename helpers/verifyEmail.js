@@ -1,31 +1,45 @@
-const sgMail = require('@sendgrid/mail');
-require('dotenv').config();
+const Mailjet = require('node-mailjet');
 
-const { SENDGRID_API_KEY, SENDGRID_FROM, PORT } = process.env;
+const { MAILJET_PUBLIC, MAILJET_PRIVATE, MAILJET_FROM, PORT } = process.env;
 
-sgMail.setApiKey(SENDGRID_API_KEY);
+const mailjet = new Mailjet({
+    apiKey: MAILJET_PUBLIC,
+    apiSecret: MAILJET_PRIVATE,
+});
 
 async function sendEmail({ to, subject, body }) {
     try {
-        const msg = {
-            to,
-            from: SENDGRID_FROM,
-            subject,
-            text: body,
-            html: `
-                <html>
-                    <body>
-                        <div style="text-align: center;">
-                            <h1>${subject}</h1>
-                            <p>${body}</p>
-                        </div>
-                    </body>
-                </html>
-            `,
-        };
-
-        await sgMail.send(msg);
+        const request = await mailjet
+            .post('send', { version: 'v3.1' })
+            .request({
+                Messages: [
+                    {
+                        From: {
+                            Email: MAILJET_FROM,
+                            Name: 'Instagrom',
+                        },
+                        To: [
+                            {
+                                Email: to,
+                            },
+                        ],
+                        Subject: subject,
+                        TextPart: body,
+                        HTMLPart: `
+                    <html>
+                        <body>
+                            <div style="text-align: center;">
+                                <h1>${subject}</h1>
+                                <p>${body}</p>
+                            </div>
+                        </body>
+                    </html>
+                    `,
+                    },
+                ],
+            });
     } catch (error) {
+        console.log('error', error);
         throw new Error('Hubo un problema al enviar el email.');
     }
 }
