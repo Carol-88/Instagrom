@@ -16,7 +16,7 @@ async function savePhoto(imagen) {
 
         sharpImage.toFile(photoPath);
 
-        return imageName;
+        return photoPath;
     } catch (error) {
         throw new Error('¡Ha ocurrido un error al procesar la imagen!');
     }

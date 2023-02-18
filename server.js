@@ -21,6 +21,8 @@ app.use(morgan('dev'));
 // instalación -> npm i express-fileupload
 app.use(fileUpload());
 
+app.use('/photos', express.static('./static/photos'));
+
 /* 
     ###################
     ### Middlewares ###
@@ -66,7 +68,8 @@ const getPhotos = require('./controllers/posts/getPhotos');
     ##############################
 */
 
-app.post('/addPhoto', isAuth, addPhoto);
+// app.post('/addPhoto', isAuth, addPhoto);
+app.post('/addPhoto', addPhoto);
 app.delete('/deletePhoto', isAuth, deletePhoto);
 app.get('/photos', getPhotos);
 

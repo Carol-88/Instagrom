@@ -11,10 +11,17 @@ const addPhoto = async (req, res, next) => {
 
         const photoName = await savePhoto(req.files.photo);
 
+        console.log('foto guardada', photoName);
+
+        // await connection.query(
+        //     `INSERT INTO photo (photoName, caption, idUser)
+        //     VALUES (?, ?, ?)`,
+        //     [photoName, caption, req.userAuth.id]
+        // );
         await connection.query(
             `INSERT INTO photo (photoName, caption, idUser)
             VALUES (?, ?, ?)`,
-            [photoName, caption, req.userAuth.id]
+            [photoName, caption, 1]
         );
 
         res.send({
