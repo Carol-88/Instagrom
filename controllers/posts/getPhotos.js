@@ -8,10 +8,10 @@ const getPhotos = async (req, res, next) => {
 
         const { caption, startDate, endDate } = req.query;
 
-        let mySQLQuery =
-            'SELECT photo.*, count(user_like_photo.id) AS likes FROM photo LEFT JOIN user_like_photo on photo.id=user_like_photo.idPhoto GROUP BY photo.id';
-        const values = [];
-        let clause = 'WHERE';
+        // let mySQLQuery =
+        //     'SELECT photo.*, count(user_like_photo.id) AS likes FROM photo LEFT JOIN user_like_photo on photo.id=user_like_photo.idPhoto GROUP BY photo.id';
+        // const values = [];
+        // let clause = 'WHERE';
 
         if (caption) {
             mySQLQuery += ` ${clause} caption LIKE ?`;

@@ -8,11 +8,11 @@ async function savePhoto(imagen) {
     try {
         const sharpImage = sharp(imagen.data);
 
-        const imageName = uuid.v4() + '.jpg';
+        const photoName = uuid.v4() + '.jpg';
 
         sharpImage.resize(1080, 1350);
 
-        const photoPath = path.join(photosDir, imageName);
+        const photoPath = path.join(photosDir, photoName);
 
         sharpImage.toFile(photoPath);
 
