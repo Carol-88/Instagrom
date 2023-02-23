@@ -91,6 +91,24 @@ const deleteFavPhoto = require('./controllers/favs/deleteFav');
 app.post('/favs/:idPhoto/like', isAuth, addFavPhoto);
 app.delete('/favs/:idPhoto/unlike', isAuth, deleteFavPhoto);
 
+/* 
+    ####################################
+    ### Controladores de comentarios ###
+    ####################################
+*/
+
+const addComment = require('./controllers/posts/addComment');
+const deleteComment = require('./controllers/posts/deleteComment');
+
+/* 
+    ################################
+    ### Endpoints de comentarios ###
+    ################################
+*/
+
+app.post('/posts/:idPhoto/comment', isAuth, addComment);
+app.delete('/posts/:idPhoto/uncomment', isAuth, deleteComment);
+
 // Middleware de Error
 app.use((error, req, res, _) => {
     console.error(error);

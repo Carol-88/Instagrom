@@ -54,6 +54,17 @@ async function main() {
         )`
         );
 
+        await connection.query(
+            `CREATE TABLE IF NOT EXISTS user_comment_photo(
+            id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+            idUser INT UNSIGNED NOT NULL,
+            idPhoto INT UNSIGNED NOT NULL,
+            addDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (idUser) REFERENCES user (id),
+            FOREIGN KEY (idPhoto) REFERENCES photo (id)
+        )`
+        );
+
         console.log('¡Tablas creadas!');
 
         console.log('Insertando datos de prueba...');
