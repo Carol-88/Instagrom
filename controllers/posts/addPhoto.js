@@ -1,5 +1,5 @@
 const getDB = require('../../db/getDB');
-const { savePhoto } = require('../../helpers');
+const { savePhoto, generateError } = require('../../helpers');
 
 const addPhoto = async (req, res, next) => {
     let connection;
@@ -8,6 +8,8 @@ const addPhoto = async (req, res, next) => {
         connection = await getDB();
 
         const { caption } = req.body;
+
+        if (!req.files.photo) generateError('Hay que subir una foto', 500);
 
         const photoName = await savePhoto(req.files.photo);
 

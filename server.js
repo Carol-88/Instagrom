@@ -40,6 +40,7 @@ const newUser = require('./controllers/users/newUser');
 const loginUser = require('./controllers/users/login');
 const validateUser = require('./controllers/users/validateUser');
 const getProfile = require('./controllers/users/getProfile');
+const getMyProfile = require('./controllers/users/getMyProfile');
 
 /* 
     ##########################
@@ -50,6 +51,7 @@ const getProfile = require('./controllers/users/getProfile');
 app.post('/register', newUser);
 app.post('/login', loginUser);
 app.get('/validate/:registrationCode', validateUser);
+app.get('/profile/', isAuth, getMyProfile);
 app.get('/profile/:idUser', getProfile);
 
 /* 
@@ -68,8 +70,8 @@ const getPhotos = require('./controllers/posts/getPhotos');
     ##############################
 */
 
-// app.post('/addPhoto', isAuth, addPhoto);
-app.post('/addPhoto', addPhoto);
+app.post('/addPhoto', isAuth, addPhoto);
+
 app.delete('/deletePhoto', isAuth, deletePhoto);
 app.get('/photos', getPhotos);
 
