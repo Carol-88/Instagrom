@@ -8,6 +8,7 @@ async function main() {
 
         console.log('Eliminando tablas en caso de que existan...');
 
+        await connection.query(`DROP TABLE IF EXISTS user_comment_photo`);
         await connection.query(`DROP TABLE IF EXISTS user_like_photo`);
         await connection.query(`DROP TABLE IF EXISTS photo`);
         await connection.query(`DROP TABLE IF EXISTS user`);
@@ -66,22 +67,6 @@ async function main() {
         );
 
         console.log('¡Tablas creadas!');
-
-        console.log('Insertando datos de prueba...');
-
-        await connection.query(
-            `INSERT INTO user (username, email, password)
-         VALUES ('userPrueba', 'prueba@gmail.com', '123')`
-        );
-
-        await connection.query(
-            `INSERT INTO photo (photoName, location, caption, idUser)
-        VALUES ('Madrid.jpg', 'Madrid', 'Celebrando Año Nuevo', 1),
-        ('Vigo.jpg', 'Vigo', 'Viendo las luces', 1),
-        ('Alicante.jpg', 'Alicante', 'Por aquí de vuelta', 1)`
-        );
-
-        console.log('¡Datos de prueba insertados con éxito!');
     } catch (error) {
         console.error(error.message);
     } finally {

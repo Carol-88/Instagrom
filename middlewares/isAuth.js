@@ -8,7 +8,8 @@ const isAuth = async (req, res, next) => {
     try {
         connection = await getDB();
 
-        const { authorization } = req.headers;
+        const { authorization } = req.headers.authorization;
+        console.log('token', req.headers.authorization);
 
         if (!authorization) {
             throw generateError('¡Falta la cabecera de autorización!', 401);
