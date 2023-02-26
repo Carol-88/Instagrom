@@ -48,11 +48,11 @@ const getMyProfile = require('./controllers/users/getMyProfile');
     ##########################
 */
 
-app.post('/register', newUser);
+app.post('/newUser', newUser);
 app.post('/login', loginUser);
 app.get('/validate/:registrationCode', validateUser);
-app.get('/profile/', isAuth, getMyProfile);
 app.get('/profile/:idUser', getProfile);
+app.get('/profile/', isAuth, getMyProfile);
 
 /* 
     ##################################
