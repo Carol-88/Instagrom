@@ -8,6 +8,7 @@ const getProfile = async (req, res, next) => {
         connection = await getDB();
 
         const { idUser } = req.params;
+
         const [[user]] = await connection.query(
             'SELECT id, username, name, lastname, avatar, birthday FROM user WHERE id = ?',
             [idUser]
