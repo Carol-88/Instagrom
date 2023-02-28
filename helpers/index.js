@@ -1,13 +1,13 @@
-const deletePhotoFile = require('./deletePhotoFile');
+const deletePostFile = require('./deletePostFile');
 const generateError = require('./generateError');
 const generateRandomCode = require('./generateRandomCode');
-const savePhoto = require('./savePhoto');
+const savePost = require('./savePost');
 const verifyEmail = require('./verifyEmail');
 
 module.exports = {
-    deletePhotoFile,
+    deletePostFile,
     generateError,
     generateRandomCode,
-    savePhoto,
+    savePost,
     verifyEmail,
 };

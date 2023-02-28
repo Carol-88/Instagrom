@@ -1,7 +1,7 @@
 const getDB = require('../../db/getDB');
 const { generateError } = require('../../helpers');
 
-const deleteFavPhoto = async (req, res, next) => {
+const deleteFavPost = async (req, res, next) => {
     let connection;
 
     try {
@@ -9,19 +9,19 @@ const deleteFavPhoto = async (req, res, next) => {
 
         const idUserAuth = req.userAuth.id;
 
-        const { idPhoto } = req.params;
-        const [[photo]] = await connection.query(
-            'SELECT * FROM photo WHERE id = ?',
-            [idPhoto]
+        const { idPost } = req.params;
+        const [[post]] = await connection.query(
+            'SELECT * FROM post WHERE id = ?',
+            [idPost]
         );
 
-        if (!photo) {
+        if (!post) {
             throw generateError('¡La foto no existe!', 404);
         }
 
         const [like] = await connection.query(
-            `SELECT * FROM user_like_photo WHERE idUser = ? AND idPhoto = ?`,
-            [idUserAuth, idPhoto]
+            `SELECT * FROM user_like_post WHERE idUser = ? AND idPost = ?`,
+            [idUserAuth, idPost]
         );
 
         if (like.length < 1) {
@@ -29,8 +29,8 @@ const deleteFavPhoto = async (req, res, next) => {
         }
 
         await connection.query(
-            `DELETE FROM user_like_photo WHERE idUser = ? AND idPhoto = ?`,
-            [idUserAuth, idPhoto]
+            `DELETE FROM user_like_post WHERE idUser = ? AND idPost = ?`,
+            [idUserAuth, idPost]
         );
 
         res.send({
@@ -44,4 +44,4 @@ const deleteFavPhoto = async (req, res, next) => {
     }
 };
 
-module.exports = deleteFavPhoto;
+module.exports = deleteFavPost;

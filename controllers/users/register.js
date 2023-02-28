@@ -10,7 +10,7 @@ const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
 
-const newUser = async (req, res, next) => {
+const register = async (req, res, next) => {
     let connection;
 
     try {
@@ -69,4 +69,4 @@ const newUser = async (req, res, next) => {
     }
 };
 
-module.exports = newUser;
+module.exports = register;
