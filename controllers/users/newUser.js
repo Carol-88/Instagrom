@@ -55,7 +55,7 @@ const newUser = async (req, res, next) => {
             [username, email, hashedPassword, registrationCode]
         );
 
-        await verifyEmail(email, registrationCode);
+        // await verifyEmail(email, registrationCode);
 
         res.send({
             status: 'Ok',

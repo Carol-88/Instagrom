@@ -28,7 +28,7 @@ async function main() {
             avatar VARCHAR(255),
             registrationCode VARCHAR(250),
             active TINYINT DEFAULT 0,
-            birthday DATE
+            birthday VARCHAR(10)
         )`
         );
 
