@@ -1,6 +1,6 @@
 const getDB = require('../../db/getDB');
 
-const getPosts = async (req, res, next) => {
+const getPhotos = async (req, res, next) => {
     let connection;
 
     try {
@@ -9,7 +9,7 @@ const getPosts = async (req, res, next) => {
         const { caption, startDate, endDate } = req.query;
 
         let mySQLQuery =
-            'SELECT post.*, count(user_like_post.id) AS likes FROM post LEFT JOIN user_like_post on post.id=user_like_post.idPost GROUP BY post.id';
+            'SELECT photo.*, count(user_like_photo.id) AS likes FROM photo LEFT JOIN user_like_photo on photo.id=user_like_photo.idPhoto GROUP BY photo.id';
         const values = [];
         let clause = 'WHERE';
 
@@ -30,11 +30,11 @@ const getPosts = async (req, res, next) => {
             values.push(`${endDate} 23:59:59`);
         }
 
-        const [posts] = await connection.query(mySQLQuery, values);
+        const [photos] = await connection.query(mySQLQuery, values);
 
         res.send({
             status: 'Ok',
-            data: posts,
+            data: photos,
         });
     } catch (error) {
         next(error);
@@ -43,4 +43,4 @@ const getPosts = async (req, res, next) => {
     }
 };
 
-module.exports = getPosts;
+module.exports = getPhotos;

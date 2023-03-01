@@ -36,9 +36,9 @@ const isAuth = require('./middlewares/isAuth');
     ### Controladores de Usuarios ###
     #################################
 */
-const register = require('./controllers/users/register');
-const validateUser = require('./controllers/users/validateUser');
+const newUser = require('./controllers/users/newUser');
 const loginUser = require('./controllers/users/login');
+const validateUser = require('./controllers/users/validateUser');
 const getProfile = require('./controllers/users/getProfile');
 const getMyProfile = require('./controllers/users/getMyProfile');
 
@@ -48,10 +48,10 @@ const getMyProfile = require('./controllers/users/getMyProfile');
     ##########################
 */
 
-app.post('/register', register);
-app.get('/validate/:registrationCode', validateUser);
+app.post('/newUser', newUser);
 app.post('/login', loginUser);
-app.get('/profile/idUser', getProfile);
+app.get('/validate/:registrationCode', validateUser);
+app.get('/profile/:idUser', getProfile);
 app.get('/profile/', isAuth, getMyProfile);
 
 /* 
@@ -60,9 +60,9 @@ app.get('/profile/', isAuth, getMyProfile);
     ##################################
 */
 
-const addPost = require('./controllers/posts/addPost');
-const deletePost = require('./controllers/posts/deletePost');
-const getPosts = require('./controllers/posts/getPosts');
+const addPhoto = require('./controllers/posts/addPhoto');
+const deletePhoto = require('./controllers/posts/deletePhoto');
+const getPhotos = require('./controllers/posts/getPhotos');
 
 /* 
     ##############################
@@ -70,9 +70,10 @@ const getPosts = require('./controllers/posts/getPosts');
     ##############################
 */
 
-app.post('/addPost', isAuth, addPost);
-app.delete('/deletePost/:idPost', isAuth, deletePost);
-app.get('/posts', getPosts);
+app.post('/addPhoto', isAuth, addPhoto);
+
+app.delete('/deletePhoto', isAuth, deletePhoto);
+app.get('/photos', getPhotos);
 
 /* 
     ##############################
@@ -80,8 +81,8 @@ app.get('/posts', getPosts);
     ##############################
 */
 
-const addFavPost = require('./controllers/favs/addFav');
-const deleteFavPost = require('./controllers/favs/deleteFav');
+const addFavPhoto = require('./controllers/favs/addFav');
+const deleteFavPhoto = require('./controllers/favs/deleteFav');
 
 /* 
     ##########################
@@ -89,8 +90,8 @@ const deleteFavPost = require('./controllers/favs/deleteFav');
     ##########################
 */
 
-app.post('/favs/:idPost/like', isAuth, addFavPost);
-app.delete('/favs/:idPost/unlike', isAuth, deleteFavPost);
+app.post('/favs/:idPhoto/like', isAuth, addFavPhoto);
+app.delete('/favs/:idPhoto/unlike', isAuth, deleteFavPhoto);
 
 /* 
     ####################################
@@ -107,8 +108,8 @@ const deleteComment = require('./controllers/posts/deleteComment');
     ################################
 */
 
-app.post('/posts/:idPost/comment', isAuth, addComment);
-app.delete('/posts/:idPost/uncomment', isAuth, deleteComment);
+app.post('/posts/:idPhoto/comment', isAuth, addComment);
+app.delete('/posts/:idPhoto/uncomment', isAuth, deleteComment);
 
 // Middleware de Error
 app.use((error, req, res, _) => {

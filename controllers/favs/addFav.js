@@ -1,7 +1,7 @@
 const getDB = require('../../db/getDB');
 const { generateError } = require('../../helpers');
 
-const addFavPost = async (req, res, next) => {
+const addFavPhoto = async (req, res, next) => {
     let connection;
 
     try {
@@ -9,14 +9,14 @@ const addFavPost = async (req, res, next) => {
 
         const idUserAuth = req.userAuth.id;
 
-        const { idPost } = req.params;
+        const { idPhoto } = req.params;
 
-        const [post] = await connection.query(
-            `SELECT * FROM post WHERE id = ?`,
-            [idPost]
+        const [photo] = await connection.query(
+            `SELECT * FROM photo WHERE id = ?`,
+            [idPhoto]
         );
 
-        if (post[0].idUser === idUserAuth) {
+        if (photo[0].idUser === idUserAuth) {
             throw generateError(
                 'No le puedes dar like a tus propias fotos',
                 409
@@ -24,8 +24,8 @@ const addFavPost = async (req, res, next) => {
         }
 
         const [like] = await connection.query(
-            `SELECT * FROM user_like_post WHERE idUser = ? AND idPost = ?`,
-            [idUserAuth, idPost]
+            `SELECT * FROM user_like_photo WHERE idUser = ? AND idPhoto = ?`,
+            [idUserAuth, idPhoto]
         );
 
         if (like.length > 0) {
@@ -33,9 +33,9 @@ const addFavPost = async (req, res, next) => {
         }
 
         await connection.query(
-            `INSERT INTO user_like_post (idUser, idPost)
+            `INSERT INTO user_like_photo (idUser, idPhoto)
             VALUES (?, ?)`,
-            [idUserAuth, idPost]
+            [idUserAuth, idPhoto]
         );
 
         res.send({
@@ -49,4 +49,4 @@ const addFavPost = async (req, res, next) => {
     }
 };
 
-module.exports = addFavPost;
+module.exports = addFavPhoto;

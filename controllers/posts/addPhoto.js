@@ -1,28 +1,30 @@
 const getDB = require('../../db/getDB');
-const { savePost, generateError } = require('../../helpers');
+const { savePhoto, generateError } = require('../../helpers');
 
-const addPost = async (req, res, next) => {
+const addPhoto = async (req, res, next) => {
     let connection;
 
     try {
         connection = await getDB();
 
         const { caption } = req.body;
-        if (!req.files.post) generateError('Hay que subir una foto', 500);
+        console.log('REQ FILES PHOTO', req.body, req.files);
+        if (!req.files?.photo)
+            throw generateError('Hay que subir una foto', 500);
 
-        const postName = await savePost(req.files.post);
+        const photoName = await savePhoto(req.files.photo);
 
         await connection.query(
-            `INSERT INTO post (postName, caption, idUser)
+            `INSERT INTO photo (photoName, caption, idUser)
             VALUES (?, ?, ?)`,
-            [postName, caption, req.userAuth.id]
+            [photoName, caption, req.userAuth.id]
         );
 
         res.send({
             status: 'Ok',
             message: '¡Foto subida con éxito!',
         });
-        if (!req.files?.post) {
+        if (!req.files?.photo) {
             throw generateError('¡Debes subir una foto!', 400);
         }
     } catch (error) {
@@ -32,4 +34,4 @@ const addPost = async (req, res, next) => {
     }
 };
 
-module.exports = addPost;
+module.exports = addPhoto;

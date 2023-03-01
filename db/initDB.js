@@ -8,9 +8,9 @@ async function main() {
 
         console.log('Eliminando tablas en caso de que existan...');
 
-        await connection.query(`DROP TABLE IF EXISTS user_comment_post`);
-        await connection.query(`DROP TABLE IF EXISTS user_like_post`);
-        await connection.query(`DROP TABLE IF EXISTS post`);
+        await connection.query(`DROP TABLE IF EXISTS user_comment_photo`);
+        await connection.query(`DROP TABLE IF EXISTS user_like_photo`);
+        await connection.query(`DROP TABLE IF EXISTS photo`);
         await connection.query(`DROP TABLE IF EXISTS user`);
 
         console.log('¡Tablas eliminadas!');
@@ -33,9 +33,9 @@ async function main() {
         );
 
         await connection.query(
-            `CREATE TABLE IF NOT EXISTS post (
+            `CREATE TABLE IF NOT EXISTS photo (
             id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-            postName VARCHAR(500),
+            photoName VARCHAR(500),
             location VARCHAR(100),
             caption VARCHAR(500),
             publication_date TIMESTAMP NOT NULL DEFAULT NOW(),
@@ -45,24 +45,24 @@ async function main() {
         );
 
         await connection.query(
-            `CREATE TABLE IF NOT EXISTS user_like_post(
+            `CREATE TABLE IF NOT EXISTS user_like_photo(
             id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
             idUser INT UNSIGNED NOT NULL,
-            idPost INT UNSIGNED NOT NULL,
+            idPhoto INT UNSIGNED NOT NULL,
             addDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (idUser) REFERENCES user (id),
-            FOREIGN KEY (idPost) REFERENCES post (id)
+            FOREIGN KEY (idPhoto) REFERENCES photo (id)
         )`
         );
 
         await connection.query(
-            `CREATE TABLE IF NOT EXISTS user_comment_post(
+            `CREATE TABLE IF NOT EXISTS user_comment_photo(
             id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
             idUser INT UNSIGNED NOT NULL,
-            idPost INT UNSIGNED NOT NULL,
+            idPhoto INT UNSIGNED NOT NULL,
             addDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (idUser) REFERENCES user (id),
-            FOREIGN KEY (idPost) REFERENCES post (id)
+            FOREIGN KEY (idPhoto) REFERENCES photo (id)
         )`
         );
 

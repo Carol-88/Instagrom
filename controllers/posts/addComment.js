@@ -9,22 +9,22 @@ const addComment = async (req, res, next) => {
 
         const idUserAuth = req.userAuth.id;
 
-        const { idPost } = req.params;
+        const { idPhoto } = req.params;
 
-        const [post] = await connection.query(
-            `SELECT * FROM post WHERE id = ?`,
-            [idPost]
+        const [photo] = await connection.query(
+            `SELECT * FROM photo WHERE id = ?`,
+            [idPhoto]
         );
 
         const [comment] = await connection.query(
-            `SELECT * FROM user_comment_post WHERE idUser = ? AND idPost = ?`,
-            [idUserAuth, idPost]
+            `SELECT * FROM user_comment_photo WHERE idUser = ? AND idPhoto = ?`,
+            [idUserAuth, idPhoto]
         );
 
         await connection.query(
-            `INSERT INTO user_comment_post (idUser, idPost)
+            `INSERT INTO user_comment_photo (idUser, idPhoto)
             VALUES (?, ?)`,
-            [idUserAuth, idPost]
+            [idUserAuth, idPhoto]
         );
 
         res.send({

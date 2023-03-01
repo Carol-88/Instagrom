@@ -9,19 +9,19 @@ const deleteComment = async (req, res, next) => {
 
         const idUserAuth = req.userAuth.id;
 
-        const { idPost } = req.params;
-        const [[post]] = await connection.query(
-            'SELECT * FROM post WHERE id = ?',
-            [idPost]
+        const { idPhoto } = req.params;
+        const [[photo]] = await connection.query(
+            'SELECT * FROM photo WHERE id = ?',
+            [idPhoto]
         );
 
-        if (!post) {
+        if (!photo) {
             throw generateError('¡La foto no existe!', 404);
         }
 
         const [comment] = await connection.query(
-            `SELECT * FROM user_comment_post WHERE idUser = ? AND idPost = ?`,
-            [idUserAuth, idPost]
+            `SELECT * FROM user_comment_photo WHERE idUser = ? AND idPhoto = ?`,
+            [idUserAuth, idPhoto]
         );
 
         if (comment.length < 1) {
@@ -29,8 +29,8 @@ const deleteComment = async (req, res, next) => {
         }
 
         await connection.query(
-            `DELETE FROM user_comment_post WHERE idUser = ? AND idPost = ?`,
-            [idUserAuth, idPost]
+            `DELETE FROM user_comment_photo WHERE idUser = ? AND idPhoto = ?`,
+            [idUserAuth, idPhoto]
         );
 
         res.send({

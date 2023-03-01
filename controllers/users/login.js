@@ -15,6 +15,8 @@ const loginUser = async (req, res, next) => {
             throw generateError(`¡Faltan campos obligatorios!, 400`);
         }
 
+        // No hace el SELECT
+
         const [user] = await connection.query(
             `SELECT * FROM user WHERE email = ?`,
             [email]

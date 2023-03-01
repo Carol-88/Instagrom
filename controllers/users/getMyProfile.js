@@ -18,12 +18,12 @@ const getProfile = async (req, res, next) => {
             throw generateError('¡El usuario no existe!', 404);
         }
 
-        const [posts] = await connection.query(
-            'SELECT * FROM post WHERE idUser = ?',
+        const [photos] = await connection.query(
+            'SELECT * FROM photo WHERE idUser = ?',
             [idUser]
         );
 
-        user.posts = posts;
+        user.photos = photos;
 
         res.send({
             status: 'Ok',

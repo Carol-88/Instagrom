@@ -8,7 +8,6 @@ const getProfile = async (req, res, next) => {
         connection = await getDB();
 
         const { idUser } = req.params;
-
         const [[user]] = await connection.query(
             'SELECT id, username, name, lastname, avatar, birthday FROM user WHERE id = ?',
             [idUser]
@@ -18,12 +17,12 @@ const getProfile = async (req, res, next) => {
             throw generateError('¡El usuario no existe!', 404);
         }
 
-        const [posts] = await connection.query(
-            'SELECT * FROM post WHERE idUser = ?',
+        const [photos] = await connection.query(
+            'SELECT * FROM photo WHERE idUser = ?',
             [idUser]
         );
 
-        user.posts = posts;
+        user.photos = photos;
 
         res.send({
             status: 'Ok',
