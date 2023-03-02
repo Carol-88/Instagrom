@@ -6,7 +6,6 @@ const photosDir = path.join(__dirname, '..', 'static', 'photos');
 
 async function savePhoto(imagen) {
     try {
-        console.log(photosDir);
         const sharpImage = sharp(imagen.data);
 
         const photoName = uuid.v4() + '.jpg';

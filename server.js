@@ -41,6 +41,7 @@ const loginUser = require('./controllers/users/login');
 const validateUser = require('./controllers/users/validateUser');
 const getProfile = require('./controllers/users/getProfile');
 const getMyProfile = require('./controllers/users/getMyProfile');
+const addAvatar = require('./controllers/users/addAvatar');
 
 /* 
     ##########################
@@ -53,6 +54,7 @@ app.post('/login', loginUser);
 app.get('/validate/:registrationCode', validateUser);
 app.get('/profile/:idUser', getProfile);
 app.get('/profile/', isAuth, getMyProfile);
+app.post('/addAvatar', isAuth, addAvatar);
 
 /* 
     ##################################

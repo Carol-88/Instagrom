@@ -8,7 +8,10 @@ const addPhoto = async (req, res, next) => {
         connection = await getDB();
 
         const { caption } = req.body;
-        console.log('REQ FILES PHOTO', req.body, req.files);
+        // const { location } = req.body;
+        // const { publication_date } = req.body;
+        console.log('CAPTION', req.body);
+
         if (!req.files?.photo)
             throw generateError('Hay que subir una foto', 500);
 
