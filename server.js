@@ -22,6 +22,7 @@ app.use(morgan('dev'));
 app.use(fileUpload());
 
 app.use('/photos', express.static('./static/photos'));
+app.use('/avatar', express.static('./static/avatar'));
 
 /* 
     ###################

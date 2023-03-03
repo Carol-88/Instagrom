@@ -8,22 +8,20 @@ const addAvatar = async (req, res, next) => {
     try {
         connection = await getDB();
 
-        const { avatar } = req.body;
-
         if (!req.files?.avatar)
             throw generateError('Hay que subir un avatar', 500);
 
-        const avatarName = await savePhoto(req.files.photo);
+        const avatarName = await savePhoto(req.files.avatar);
 
-        await connection.query(
-            `INSERT INTO user (avatarName, avatar, id)
-            VALUES (?, ?, ?)`,
-            [avatarName, avatar, req.userAuth.id]
-        );
+        await connection.query(`UPDATE user SET avatar = ? WHERE user.id = ?`, [
+            avatarName,
+            req.userAuth.id,
+        ]);
 
         res.send({
             status: 'Ok',
             message: 'Avatar subido con éxito!',
+            data: { avatarName },
         });
         if (!req.files?.avatar) {
             throw generateError('¡Debes subir un avatar!', 400);
