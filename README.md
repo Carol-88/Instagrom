@@ -1,6 +1,6 @@
-########## Proyecto HackaBoss Backend ##########
+# ########## Proyecto HackaBoss Backend ##########
 
-########## API Instagrom ##########
+# ########## API Instagrom ##########
 
 -   Esta API es un clon de Instagram que permite publicar fotos (añadiendo o no textos) y que otras
     personas puedan verlas.
@@ -21,7 +21,7 @@ _CREATE DATABASE IF NOT EXISTS instagrom;_
 
 -   Importar la colección PostmanCollection.json a la aplicación de Postman con todos los endpoints creados.
 
-########## Usuarios anónimos
+# ######### Usuarios anónimos
 
 - Ver las últimas fotos publicadas por otros usuarios ✅
 - Ver el perfil de un usuario con su galería de fotos ✅
@@ -29,12 +29,12 @@ _CREATE DATABASE IF NOT EXISTS instagrom;_
 - Login ✅
 - Registro ✅
 
-########## Usuarios registrados
+# ######### Usuarios registrados
 
 - Hacer una publicación de una foto (la foto debe ajustarse automáticamente a un tamaño máximo y unas proporciones establecidas por la plataforma), y añadirle una descripción ✅
 - Hacer/Quitar un “like” a una foto ✅
 
-########## Opcional:
+# ######### Opcional:
 
 Gestión del perfil (cambios en los datos de registro)
 Comentar una foto (no se permiten comentarios a comentarios)
