@@ -16,7 +16,8 @@ const newUser = async (req, res, next) => {
     try {
         connection = await getDB();
 
-        const { username, email, password } = req.body;
+        const { username, email, name, lastname, birthday, password } =
+            req.body;
 
         if (!username || !email || !password) {
             throw generateError('¡Faltan datos obligatorios!', 400);
@@ -51,8 +52,16 @@ const newUser = async (req, res, next) => {
         const registrationCode = generateRandomCode(40);
 
         await connection.query(
-            `INSERT INTO user (username, email, password, registrationCode) VALUES (?, ?, ?, ?)`,
-            [username, email, hashedPassword, registrationCode]
+            `INSERT INTO user (username, email, name, lastname, birthday, password, registrationCode) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            [
+                username,
+                email,
+                name,
+                lastname,
+                birthday,
+                hashedPassword,
+                registrationCode,
+            ]
         );
 
         // await verifyEmail(email, registrationCode);

@@ -8,8 +8,7 @@ const addPhoto = async (req, res, next) => {
         connection = await getDB();
 
         const { caption } = req.body;
-        // const { location } = req.body;
-        // const { publication_date } = req.body;
+        const { location } = req.body;
         console.log('CAPTION', req.body);
 
         if (!req.files?.photo)
@@ -18,9 +17,9 @@ const addPhoto = async (req, res, next) => {
         const photoName = await savePhoto(req.files.photo);
 
         await connection.query(
-            `INSERT INTO photo (photoName, caption, idUser)
-            VALUES (?, ?, ?)`,
-            [photoName, caption, req.userAuth.id]
+            `INSERT INTO photo (photoName, caption, idUser, location)
+            VALUES (?, ?, ?, ?)`,
+            [photoName, caption, req.userAuth.id, location]
         );
 
         res.send({

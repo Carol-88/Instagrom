@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \"username\": \"Marta\", \"email\": \"marta@hotmail.com\", \"password\": \"marta123\" }",
+					"raw": "{ \"username\": \"jaime_vg\", \"email\": \"jaime.vg@hotmail.com\", \"password\": \"1234\" }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -20,14 +20,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/register",
+					"raw": "http://localhost:4001/newUser",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "4000",
+					"port": "4001",
 					"path": [
-						"register"
+						"newUser"
 					]
 				}
 			},
@@ -35,12 +35,15 @@
 		},
 		{
 			"name": "Validar usuario",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \"email\": \"marta@hotmail.com\", \"password\": \"marta123\"}",
+					"raw": "{ \"email\": \"jaime.vg@hotmail.com\", \"password\": \"1234\"}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -48,12 +51,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/validate/:registrationCode?registrationCode=d7c67ea5b815745dfa00a41fdeb22c98ad72edf58cd06fd924d5b689a24ca65f34d4cab1e3e47d86",
+					"raw": "http://localhost:4001/validate/:registrationCode?registrationCode=e18e5557631e5fe0acf09993ece5db63c55fd016851969acd71edc45aa03f760ff5f7103f03e67a4",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "4000",
+					"port": "4001",
 					"path": [
 						"validate",
 						":registrationCode"
@@ -61,13 +64,13 @@
 					"query": [
 						{
 							"key": "registrationCode",
-							"value": "d7c67ea5b815745dfa00a41fdeb22c98ad72edf58cd06fd924d5b689a24ca65f34d4cab1e3e47d86"
+							"value": "e18e5557631e5fe0acf09993ece5db63c55fd016851969acd71edc45aa03f760ff5f7103f03e67a4"
 						}
 					],
 					"variable": [
 						{
 							"key": "registrationCode",
-							"value": "7fc9988698192f062c5d7ad752028bd0647a7bad38148a042e91d731d3cd98c8149edd2b32a5bfa7"
+							"value": ""
 						}
 					]
 				}
@@ -84,7 +87,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \"email\": \"marta@hotmail.com\", \"password\": \"marta123\" }",
+					"raw": "{ \"email\": \"marty.vg@hotmail.com\", \"password\": \"1234\" }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -92,14 +95,20 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/login",
+					"raw": "http://localhost:4001/login?",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "4000",
+					"port": "4001",
 					"path": [
 						"login"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
 					]
 				}
 			},
@@ -112,7 +121,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "{{token}}",
+						"value": "{{token2}}",
 						"type": "default"
 					}
 				],
@@ -120,19 +129,19 @@
 					"mode": "formdata",
 					"formdata": [
 						{
-							"key": "photoName",
-							"value": "Madrid",
+							"key": "caption",
+							"value": "Cámara",
 							"type": "default"
 						},
 						{
-							"key": "caption",
-							"value": "Celebrando Año Nuevo",
-							"type": "default"
+							"key": "location",
+							"value": "Villa",
+							"type": "text"
 						},
 						{
 							"key": "photo",
 							"type": "file",
-							"src": "/C:/Users/marty/OneDrive/Escritorio/1.jpg"
+							"src": "/C:/Users/marty/Desktop/descargar.jpg"
 						}
 					],
 					"options": {
@@ -142,12 +151,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/addPhoto",
+					"raw": "http://localhost:4001/addPhoto",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "4000",
+					"port": "4001",
 					"path": [
 						"addPhoto"
 					]
@@ -156,23 +165,23 @@
 			"response": []
 		},
 		{
-			"name": "Eliminar foto",
+			"name": "Eliminar like foto",
 			"request": {
 				"method": "DELETE",
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "{{token3}}",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjc3ODQ0ODA1LCJleHAiOjE2NzgwMTc2MDV9.yOvnZBwzSKvHXA_WEXqgKY_BUls1MAyBgXfVD_SBFLQ",
 						"type": "default"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:4000/favs/1/unlike",
+					"raw": "http://localhost:4001/favs/1/unlike",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "4000",
+					"port": "4001",
 					"path": [
 						"favs",
 						"1",
@@ -189,20 +198,20 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "{{token3}}",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc3OTQ5NTc5LCJleHAiOjE2NzgxMjIzNzl9.lcj468yXS-tll2ajGlbWb-2_gQFp932O7LttnNj6A4k",
 						"type": "default"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:4000/favs/1/like",
+					"raw": "http://localhost:4001/favs/2/like",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "4000",
+					"port": "4001",
 					"path": [
 						"favs",
-						"1",
+						"2",
 						"like"
 					]
 				}
@@ -210,17 +219,57 @@
 			"response": []
 		},
 		{
-			"name": "Ver fotos",
+			"name": "Comentario foto",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4000/photos",
+					"raw": "http://localhost:4001/posts/:idPhoto/comment",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "4000",
+					"port": "4001",
+					"path": [
+						"posts",
+						":idPhoto",
+						"comment"
+					],
+					"variable": [
+						{
+							"key": "idPhoto",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ver fotos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:4001/photos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
 					"path": [
 						"photos"
 					],
@@ -239,17 +288,58 @@
 			"name": "Ver perfil",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "default"
+					}
+				],
 				"url": {
-					"raw": "http://localhost:4000/profile/",
+					"raw": "http://localhost:4001/profile/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "4000",
+					"port": "4001",
 					"path": [
 						"profile",
 						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Subir avatar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "avatar",
+							"type": "file",
+							"src": "/C:/Users/marty/Desktop/descargar.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:4001/addAvatar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"addAvatar"
 					]
 				}
 			},
@@ -283,22 +373,12 @@
 			"type": "string"
 		},
 		{
-			"key": "registrationCode",
-			"value": "",
-			"type": "string"
-		},
-		{
 			"key": "token",
 			"value": "",
 			"type": "default"
 		},
 		{
 			"key": "token2",
-			"value": "",
-			"type": "default"
-		},
-		{
-			"key": "token3",
 			"value": "",
 			"type": "default"
 		}
